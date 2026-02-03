@@ -1,16 +1,149 @@
+import { Link, useRouter } from "expo-router";
 import { useThemeColor } from "@/hooks/use-theme-color";
-import { Text } from "react-native";
+import {
+  Keyboard,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Input from "@/components/Input";
+import { useState } from "react";
+import Separator from "@/components/Separator";
+import Button from "@/components/Button";
+import SocialButtons from "@/components/SocialButtons";
+import LogoHeader from "@/components/LogoHeader";
 
 export default function RegisterScreen() {
+  const router = useRouter();
   const textColor = useThemeColor({}, "text");
   const backgroundColor = useThemeColor({}, "background");
 
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [showPassword, setShowPassword] = useState(true);
+
+  const handleRegister = () => {
+    router.push("/(tabs)");
+  };
+
   return (
-    <SafeAreaView>
-      <SafeAreaView style={[{ backgroundColor }]}>
-        <Text style={[{ color: textColor }]}>Register Page</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <SafeAreaView style={[{ flex: 1, padding: 16, backgroundColor }]}>
+        <View style={styles.container}>
+          <LogoHeader /> {/* Logo */}
+          <View style={styles.content}>
+            <Text style={[styles.text, { color: textColor }]}>REGISTRO</Text>
+            <Text style={styles.textSlogan}>
+              Crie sua conta e comece a organizar suas tarefas.
+            </Text>
+            <View style={styles.forms}>
+              <Input
+                label="Nome"
+                type="text"
+                placeholder="Seu nome completo"
+                value={name}
+                onChangeText={setName}
+              />
+              <Input
+                label="Email"
+                type="email"
+                placeholder="ex: exemplo@email.com"
+                value={email}
+                onChangeText={setEmail}
+              />
+              <Input
+                label="Senha"
+                type="password"
+                placeholder="Sua senha"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={showPassword}
+                onToggleSecureEntry={() => setShowPassword(!showPassword)}
+              />
+              <Button
+                title="Registrar"
+                onPress={handleRegister}
+                style={{ marginTop: 50 }}
+              />
+              <Separator label="OU" />
+              <SocialButtons /> {/* Social buttons */}
+              <Text
+                style={[
+                  styles.textLink,
+                  { color: textColor, textAlign: "center", marginTop: 20 },
+                ]}
+              >
+                Já possui uma conta?{" "}
+                <Link href={"/auth/login"} style={styles.link}>
+                  Faça login
+                </Link>
+              </Text>
+              <View style={styles.footer}>
+                <Text style={[styles.footerText, { color: textColor }]}>
+                  Ao continuar, você concorda com nossos{" "}
+                  <Link href="/" style={styles.link}>
+                    Termos de Uso
+                  </Link>{" "}
+                  e{" "}
+                  <Link href="/" style={styles.link}>
+                    Política de Privacidade
+                  </Link>
+                  .
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
       </SafeAreaView>
-    </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  content: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 50,
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: "800",
+    marginBottom: 10,
+  },
+  textSlogan: {
+    fontSize: 15,
+    fontWeight: "400",
+    fontStyle: "italic",
+    color: "#1380ed",
+  },
+  forms: {
+    padding: 20,
+  },
+  textLink: {
+    fontSize: 14,
+    fontWeight: "500",
+    textAlign: "right",
+  },
+  link: {
+    textDecorationLine: "underline",
+    color: "#1380ed",
+  },
+  footer: {
+    marginTop: 30,
+    paddingHorizontal: 20,
+    width: "100%",
+  },
+  footerText: {
+    fontSize: 12,
+    textAlign: "center",
+  },
+});

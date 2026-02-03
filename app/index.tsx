@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   text: {
     marginTop: 12,
     fontSize: 24,
-    fontWeight: "600",
+    fontWeight: "900",
   },
   slogan: {
     marginTop: 8,

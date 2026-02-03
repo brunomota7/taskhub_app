@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "app-taskhub",
+    "name": "TaskHub",
     "slug": "app-taskhub",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo.png",
     "scheme": "apptaskhub",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -30,12 +30,12 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/logo.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#E6F4FE",
           "dark": {
-            "backgroundColor": "#000000"
+            "backgroundColor": "#121212"
           }
         }
       ]
