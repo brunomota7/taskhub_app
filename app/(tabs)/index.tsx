@@ -1,25 +1,23 @@
-import { Colors } from "@/constants/theme";
+import Header from "@/components/Header";
+import { useThemeColor } from "@/hooks/use-theme-color";
 import { StyleSheet, Text, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
+  const backgroundColor = useThemeColor({}, "background");
+
   return (
-    <SafeAreaProvider
-      style={{
-        flex: 1,
-        paddingHorizontal: 16,
-        paddingVertical: 52,
-        backgroundColor: Colors.light.background,
-      }}
-    >
-      <View>
-        <Text>Initial page</Text>
-      </View>
-    </SafeAreaProvider>
+    <SafeAreaView style={[styles.container, { backgroundColor}]}>
+      <Header />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16
+  },
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
