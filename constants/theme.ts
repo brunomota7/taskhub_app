@@ -10,22 +10,23 @@ const tintColorDark = '#fff';
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    text: '#1A1A1A',          // Texto principal em tom escuro
+    background: '#FFFFFF',    // Fundo branco
+    tint: '#2D9CDB',          // Azul principal (ações/destaques)
+    icon: '#4F4F4F',          // Ícones em cinza médio
+    tabIconDefault: '#828282',// Ícones padrão em cinza
+    tabIconSelected: '#27AE60'// Verde para ícone selecionado (tarefas concluídas)
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    text: '#F2F2F2',          // Texto claro
+    background: '#121212',    // Fundo escuro
+    tint: '#2D9CDB',          // Azul principal adaptado
+    icon: '#BDBDBD',          // Ícones em cinza claro
+    tabIconDefault: '#9E9E9E',// Ícones padrão em cinza
+    tabIconSelected: '#27AE60'// Verde para ícone selecionado (tarefas concluídas)
   },
 };
+
 
 export const Fonts = Platform.select({
   ios: {
