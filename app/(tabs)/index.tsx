@@ -1,9 +1,11 @@
 import Button from "@/components/Button";
+import ButtonFloating from "@/components/ButtonFloating";
 import Card from "@/components/Card";
 import CardGroup from "@/components/CardGroup";
 import { CircularProgressBar } from "@/components/CircularProgressBar";
 import Header from "@/components/Header";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import { FontAwesome6 } from "@expo/vector-icons";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
@@ -104,6 +106,14 @@ export default function HomeScreen() {
             </View>
           </View>
         }
+      />
+
+      {/*
+        Criar função para abrir modal e adiconar uma nova task
+      */}
+      <ButtonFloating
+        onPress={() => console.log("Add button")} 
+        icon={<FontAwesome6 name="add" size={24} color="#F2F2F2" />}
       />
     </SafeAreaView>
   );
