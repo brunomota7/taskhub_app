@@ -2,7 +2,7 @@ import { Button, FloatingButton } from "@/components/Button";
 import Card from "@/components/Card/cardBase";
 import CardGroup from "@/components/Card/cardGroup";
 import { CircularProgressBar } from "@/components/CircularProgressBar";
-import Header from "@/components/Header";
+import Header from "@/components/Header/header";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { Link, useRouter } from "expo-router";

@@ -1,7 +1,7 @@
 import Button from "@/components/Button/button";
 import SocialButtons from "@/components/Button/socialButtons";
+import LogoHeader from "@/components/Header/logoHeader";
 import Input from "@/components/Input";
-import LogoHeader from "@/components/LogoHeader";
 import Separator from "@/components/Separator";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { Link, useRouter } from "expo-router";
