@@ -7,7 +7,7 @@ type FloatingProps = {
   style?: ViewStyle;
 };
 
-export default function ButtonFloating({
+export default function FloatingButton({
   onPress,
   icon,
   style,

@@ -1,22 +1,28 @@
-import { Text, View, StyleSheet } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import ButtonClose from "@/components/Button/closeButton";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import { Ionicons } from "@expo/vector-icons";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { StyleSheet, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function GroupDetails() {
+  const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const textColor = useThemeColor({}, "text");
   const backgroundColor = useThemeColor({}, "background");
 
   return (
-    <View style={[styles.container, { backgroundColor }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor }]}>
       <Text style={[styles.title, { color: textColor }]}>
         Detalhes do Grupo
       </Text>
+      <ButtonClose
+        //icon={<Ionicons name="close-sharp" size={24} color="black" />} 
+        onPress={() => router.back()} 
+      />
 
-      <Text style={styles.subtitle}>
-        ID do grupo: {id}
-      </Text>
-    </View>
+      <Text style={styles.subtitle}>ID do grupo: {id}</Text>
+    </SafeAreaView>
   );
 }
 

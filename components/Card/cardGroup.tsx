@@ -1,11 +1,11 @@
-import { StyleSheet, View, Text, Image } from "react-native";
-import Card from "../Card";
-import React from "react";
-import { FontAwesome5 } from "@expo/vector-icons";
-import Button from "../Button";
-import { useRouter } from "expo-router";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { Avatar } from "react-native-paper";
+import Button from "../Button/button";
+import Card from "./cardBase";
 
 type CardGroupProps = {
   nameGroup: string;

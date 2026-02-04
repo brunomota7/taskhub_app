@@ -1,7 +1,6 @@
-import Button from "@/components/Button";
-import ButtonFloating from "@/components/ButtonFloating";
-import Card from "@/components/Card";
-import CardGroup from "@/components/CardGroup";
+import { Button, FloatingButton } from "@/components/Button";
+import Card from "@/components/Card/cardBase";
+import CardGroup from "@/components/Card/cardGroup";
 import { CircularProgressBar } from "@/components/CircularProgressBar";
 import Header from "@/components/Header";
 import { useThemeColor } from "@/hooks/use-theme-color";
@@ -111,8 +110,8 @@ export default function HomeScreen() {
       {/*
         Criar função para abrir modal e adiconar uma nova task
       */}
-      <ButtonFloating
-        onPress={() => console.log("Add button")} 
+      <FloatingButton
+        onPress={() => console.log("Add button")}
         icon={<FontAwesome6 name="add" size={24} color="#F2F2F2" />}
       />
     </SafeAreaView>

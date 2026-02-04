@@ -1,9 +1,9 @@
+import Logo from "@/assets/images/logo.png";
+import Button from "@/components/Button/button";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import { Link, useRouter } from "expo-router";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Logo from "@/assets/images/logo.png";
-import Button from "@/components/Button";
-import { Link, useRouter } from "expo-router";
 
 export default function SplashScreen() {
   const router = useRouter();

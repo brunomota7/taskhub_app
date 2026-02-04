@@ -1,9 +1,9 @@
+import { useThemeColor } from "@/hooks/use-theme-color";
+import { Ionicons, Octicons } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import { useThemeColor } from "@/hooks/use-theme-color";
-import Button from "../Button";
-import { Ionicons, Octicons } from "@expo/vector-icons";
+import Button from "../Button/button";
 
 export default function Header() {
   const textColor = useThemeColor({}, "text");
@@ -40,7 +40,10 @@ export default function Header() {
     <View style={styles.header}>
       <Pressable onPress={pickImage}>
         {profileImage ? (
-          <Image source={{ uri: profileImage }} style={[styles.avatar, { borderColor }]} />
+          <Image
+            source={{ uri: profileImage }}
+            style={[styles.avatar, { borderColor }]}
+          />
         ) : (
           <Image
             source={require("@/assets/images/avatar.png")}
@@ -62,7 +65,7 @@ export default function Header() {
             borderRadius: 100,
             alignItems: "center",
             justifyContent: "center",
-            paddingHorizontal: 0, 
+            paddingHorizontal: 0,
             paddingVertical: 0,
             backgroundColor: backgroundColor,
           }}
@@ -76,7 +79,7 @@ export default function Header() {
             borderRadius: 100,
             alignItems: "center",
             justifyContent: "center",
-            paddingHorizontal: 0, 
+            paddingHorizontal: 0,
             paddingVertical: 0,
             backgroundColor: backgroundColor,
           }}

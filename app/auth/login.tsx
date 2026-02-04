@@ -1,5 +1,11 @@
-import { Link, useRouter } from "expo-router";
+import Button from "@/components/Button/button";
+import SocialButtons from "@/components/Button/socialButtons";
+import Input from "@/components/Input";
+import LogoHeader from "@/components/LogoHeader";
+import Separator from "@/components/Separator";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import { Link, useRouter } from "expo-router";
+import { useState } from "react";
 import {
   Keyboard,
   StyleSheet,
@@ -8,12 +14,6 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Input from "@/components/Input";
-import { useState } from "react";
-import Separator from "@/components/Separator";
-import Button from "@/components/Button";
-import SocialButtons from "@/components/SocialButtons";
-import LogoHeader from "@/components/LogoHeader";
 
 export default function LoginScreen() {
   const router = useRouter();
