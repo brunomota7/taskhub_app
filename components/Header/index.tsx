@@ -8,6 +8,7 @@ import { Ionicons, Octicons } from "@expo/vector-icons";
 export default function Header() {
   const textColor = useThemeColor({}, "text");
   const backgroundColor = useThemeColor({}, "border");
+  const borderColor = useThemeColor({}, "tint");
   const iconColor = useThemeColor({}, "icon");
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [username, setUsername] = useState("Bruno Mota");
@@ -39,11 +40,11 @@ export default function Header() {
     <View style={styles.header}>
       <Pressable onPress={pickImage}>
         {profileImage ? (
-          <Image source={{ uri: profileImage }} style={styles.avatar} />
+          <Image source={{ uri: profileImage }} style={[styles.avatar, { borderColor }]} />
         ) : (
           <Image
             source={require("@/assets/images/avatar.png")}
-            style={styles.avatar}
+            style={[styles.avatar, { borderColor }]}
           />
         )}
       </Pressable>
@@ -88,6 +89,8 @@ export default function Header() {
 const styles = StyleSheet.create({
   header: {
     width: "100%",
+    marginBottom: 12,
+    paddingHorizontal: 16,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -95,6 +98,7 @@ const styles = StyleSheet.create({
   avatar: {
     width: 40,
     height: 40,
+    borderWidth: 1,
     borderRadius: 20,
   },
   contentText: {

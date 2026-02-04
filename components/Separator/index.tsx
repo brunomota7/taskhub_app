@@ -1,11 +1,12 @@
 import { useThemeColor } from "@/hooks/use-theme-color";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ViewStyle } from "react-native";
 
 type SeparatorProps = {
   label?: string;
+  style?: ViewStyle;
 };
 
-export default function Separator({ label }: SeparatorProps) {
+export default function Separator({ label, style }: SeparatorProps) {
   const borderColor = useThemeColor({}, "border");
   const textColor = useThemeColor({}, "tabIconDefault");
 
@@ -13,12 +14,12 @@ export default function Separator({ label }: SeparatorProps) {
     <View style={styles.container}>
       {label ? (
         <>
-          <View style={[styles.line, { borderColor }]} />
+          <View style={[styles.line, { borderColor }, style]} />
           <Text style={[styles.label, { color: textColor }]}>{label}</Text>
-          <View style={[styles.line, { borderColor }]} />
+          <View style={[styles.line, { borderColor }, style]} />
         </>
       ) : (
-        <View style={[styles.line, { borderColor }]} />
+        <View style={[styles.line, { borderColor }, style]} />
       )}
     </View>
   );
