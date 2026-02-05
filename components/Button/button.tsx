@@ -15,6 +15,7 @@ type ButtonProps = {
   textStyle?: TextStyle;
   icon?: React.ReactNode;
   isIconOnly?: boolean;
+  disabled?: boolean;
 };
 
 export default function Button({
@@ -25,16 +26,20 @@ export default function Button({
   textStyle,
   icon,
   isIconOnly = false,
+  disabled = false,
 }: ButtonProps) {
   return (
     <Pressable
       onPress={onPress}
-      style={[
+      disabled={disabled}
+      style={({ pressed }) => [
         styles.base,
-        isIconOnly && styles.iconOnly, 
+        isIconOnly && styles.iconOnly,
         variant === "default" && styles.default,
         variant === "outline" && styles.outline,
         variant === "ghost" && styles.ghost,
+        disabled && styles.disabled,
+        pressed && !disabled && styles.pressed,
         style,
       ]}
     >
@@ -43,8 +48,9 @@ export default function Button({
         <Text
           style={[
             styles.text,
-            variant === "outline" && { color: "#2D9CDB" },
-            variant === "ghost" && { color: "#4F4F4F" },
+            variant === "outline" && styles.outlineText,
+            variant === "ghost" && styles.ghostText,
+            disabled && styles.disabledText,
             textStyle,
           ]}
         >
@@ -84,9 +90,24 @@ const styles = StyleSheet.create({
   ghost: {
     backgroundColor: "transparent",
   },
+  pressed: {
+    opacity: 0.85,
+  },
+  disabled: {
+    opacity: 0.5,
+  },
   text: {
     fontSize: 16,
     fontWeight: "600",
     color: "#fff",
+  },
+  outlineText: {
+    color: "#2D9CDB",
+  },
+  ghostText: {
+    color: "#4F4F4F",
+  },
+  disabledText: {
+    color: "#E0E0E0",
   },
 });

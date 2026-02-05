@@ -16,4 +16,5 @@ export type GroupResponse = {
 export type CreateGroup = {
     groupName: string;
     description: string;
+    typeGroup: string;
 };
