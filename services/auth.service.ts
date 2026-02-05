@@ -19,4 +19,4 @@ export async function login(data: LoginRequest) {
 
 export async function signup(data: SignupRequest): Promise<void> {
   await api.post("/auth/signup", data);
-}
+};

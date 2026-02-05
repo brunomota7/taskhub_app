@@ -9,6 +9,7 @@ import Card from "./cardBase";
 
 type CardGroupProps = {
   nameGroup: string;
+  description: string;
   typeGroup: string;
   quantTasks: number;
   image?: any;
@@ -17,6 +18,7 @@ type CardGroupProps = {
 
 export default function CardGroup({
   nameGroup,
+  description,
   typeGroup,
   quantTasks,
   image,
@@ -39,6 +41,7 @@ export default function CardGroup({
             <Text style={[styles.title, { color: textColor }]}>
               {nameGroup}
             </Text>
+            <Text style={[styles.description, { color: textColor }]}>{description}</Text>
           </View>
 
           <View style={styles.avatarStack}>
@@ -108,6 +111,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: "700",
+  },
+  description: {
+    fontSize: 12,
+    fontWeight: "500",
   },
   avatarStack: {
     flexDirection: "row",

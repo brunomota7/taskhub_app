@@ -8,4 +8,3 @@ export function setAuthToken(token: string | null) {
 export function getAuthToken() {
   return authToken;
 }
-

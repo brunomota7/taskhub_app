@@ -4,9 +4,11 @@ import CardGroup from "@/components/Card/cardGroup";
 import { CircularProgressBar } from "@/components/CircularProgressBar";
 import Header from "@/components/Header/header";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import { getMyGroups } from "@/services/groups.service";
+import { GroupResponse } from "@/types/Group";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { Link, useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -20,29 +22,16 @@ export default function HomeScreen() {
 
   const productivity = completedTasks / totalTasks;
 
-  const groups = [
-    {
-      id: "marketing-q4",
-      nameGroup: "Marketing Campaign Q4",
-      typeGroup: "Marketing",
-      quantTasks: 8,
-      image: require("../../assets/images/banner-2.jpg"),
-    },
-    {
-      id: "product-roadmap",
-      nameGroup: "Product Roadmap",
-      typeGroup: "Product",
-      quantTasks: 12,
-      image: require("../../assets/images/banner-3.jpg"),
-    },
-    {
-      id: "design-sprint",
-      nameGroup: "Design Sprint",
-      typeGroup: "Design",
-      quantTasks: 5,
-      image: require("../../assets/images/banner-4.jpg"),
-    },
-  ];
+  const [groups, setGroups] = useState<GroupResponse[]>([]);
+
+  useEffect(() => {
+    async function loadGroups() {
+      const data = await getMyGroups();
+      setGroups(data);
+    }
+
+    loadGroups();
+  }, []);
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor }]}>
@@ -53,10 +42,11 @@ export default function HomeScreen() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <CardGroup
-            nameGroup={item.nameGroup}
+            nameGroup={item.groupName}
+            description={item.description}
             typeGroup={item.typeGroup}
             quantTasks={item.quantTasks}
-            image={item.image}
+            //image={item.image}
             groupId={item.id}
           />
         )}

@@ -1,8 +1,12 @@
 import { IconButton } from "@/components/Button";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import { getGroupById } from "@/services/groups.service";
+import { GroupResponse } from "@/types/Group";
 import { AntDesign, MaterialIcons, Octicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function GroupDetails() {
@@ -13,6 +17,32 @@ export default function GroupDetails() {
   const backgroundColor = useThemeColor({}, "background");
   const iconColor = useThemeColor({}, "icon");
   const borderBorder = useThemeColor({}, "border");
+
+  const [group, setGroup] = useState<GroupResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadGroup() {
+      if (!id) return;
+
+      try {
+        const data = await getGroupById(id);
+        setGroup(data);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadGroup();
+  }, [id]);
+
+  if (loading) {
+    return <ActivityIndicator />;
+  }
+
+  if (!group) {
+    return <Text style={[ { color: textColor }]}>Grupo não encontrado.</Text>
+  }
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor }]}>
