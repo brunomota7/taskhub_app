@@ -3,6 +3,7 @@ import SocialButtons from "@/components/Button/socialButtons";
 import LogoHeader from "@/components/Header/logoHeader";
 import Input from "@/components/Input";
 import Separator from "@/components/Separator";
+import { useAuth } from "@/contexts/AuthContext";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
@@ -20,12 +21,20 @@ export default function LoginScreen() {
   const textColor = useThemeColor({}, "text");
   const backgroundColor = useThemeColor({}, "background");
 
+  const { login } = useAuth();
+  const [erro, setErro] = useState<string>();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(true);
 
-  const handleLogin = () => {
-    router.push("/(tabs)");
+  const handleLogin = async () => {
+    try {
+      await login(email, password);
+      router.replace("/(tabs)");
+    } catch (err) {
+      setErro("Credenciais inválidas. Tente novamente");
+      console.log(err);
+    }
   };
 
   return (
@@ -61,11 +70,14 @@ export default function LoginScreen() {
                   Clique aqui
                 </Link>
               </Text>
+              {erro && (
+                <Text style={styles.erro}>{erro}</Text>
+              )}
               <Button
                 title="Entrar"
                 onPress={handleLogin}
                 style={{
-                  marginTop: 50,
+                  marginTop: 20,
                 }}
               />
               <Separator label="OU" />
@@ -97,7 +109,7 @@ export default function LoginScreen() {
             </View>
           </View>
         </View>
-      </SafeAreaView>
+      </SafeAreaView> 
     </TouchableWithoutFeedback>
   );
 }
@@ -136,6 +148,13 @@ const styles = StyleSheet.create({
   link: {
     textDecorationLine: "underline",
     color: "#1380ed",
+  },
+  erro: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#ff0000",
+    textAlign: "center",
+    marginTop: 10,
   },
   footer: {
     marginTop: 30,

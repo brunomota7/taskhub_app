@@ -4,6 +4,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import Button from "../Button/button";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Header() {
   const textColor = useThemeColor({}, "text");
@@ -11,7 +12,8 @@ export default function Header() {
   const borderColor = useThemeColor({}, "tint");
   const iconColor = useThemeColor({}, "icon");
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [username, setUsername] = useState("Bruno Mota");
+  
+  const { user } = useAuth();
 
   const pickImage = async () => {
     const permissionResult =
@@ -53,7 +55,7 @@ export default function Header() {
       </Pressable>
       <View style={styles.contentText}>
         <Text style={styles.text}>Bem-vindo de volta,</Text>
-        <Text style={[styles.username, { color: textColor }]}>{username}</Text>
+        <Text style={[styles.username, { color: textColor }]}>{user?.name}</Text>
       </View>
       <View style={styles.contentBtns}>
         <Button

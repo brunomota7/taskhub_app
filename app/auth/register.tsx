@@ -4,6 +4,7 @@ import LogoHeader from "@/components/Header/logoHeader";
 import Input from "@/components/Input";
 import Separator from "@/components/Separator";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import { signup } from "@/services/auth.service";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -20,13 +21,20 @@ export default function RegisterScreen() {
   const textColor = useThemeColor({}, "text");
   const backgroundColor = useThemeColor({}, "background");
 
+  const [erro, setErro] = useState<string>();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(true);
 
-  const handleRegister = () => {
-    router.push("/(tabs)");
+  const handleRegister = async () => {
+    try {
+      await signup({ name, email, password });
+      router.replace("/auth/login");
+    } catch (err) {
+      setErro("Erro ao criar conta. Verifique os dados.");
+      console.error(err);
+    }
   };
 
   return (
@@ -63,6 +71,7 @@ export default function RegisterScreen() {
                 secureTextEntry={showPassword}
                 onToggleSecureEntry={() => setShowPassword(!showPassword)}
               />
+              {erro && <Text style={styles.erro}>{erro}</Text>}
               <Button
                 title="Registrar"
                 onPress={handleRegister}
@@ -127,6 +136,13 @@ const styles = StyleSheet.create({
   },
   forms: {
     padding: 20,
+  },
+  erro: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#ff0000",
+    textAlign: "center",
+    marginTop: 10,
   },
   textLink: {
     fontSize: 14,

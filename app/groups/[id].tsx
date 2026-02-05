@@ -12,10 +12,11 @@ export default function GroupDetails() {
   const textColor = useThemeColor({}, "text");
   const backgroundColor = useThemeColor({}, "background");
   const iconColor = useThemeColor({}, "icon");
+  const borderBorder = useThemeColor({}, "border");
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor }]}>
-      <View style={styles.header}>
+      <View style={[styles.header, { borderBottomColor: borderBorder }]}>
         <View style={styles.left}>
           <IconButton
             icon={
@@ -55,14 +56,15 @@ export default function GroupDetails() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
   },
   header: {
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderBottomWidth: 0.9,
   },
   left: {
     flexDirection: "row",
@@ -84,6 +86,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    marginTop: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
 });
