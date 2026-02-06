@@ -3,12 +3,11 @@ import Card from "@/components/Card/cardBase";
 import CardGroup from "@/components/Card/cardGroup";
 import { CircularProgressBar } from "@/components/CircularProgressBar";
 import Header from "@/components/Header/header";
+import { useGroups } from "@/contexts/GroupsContext";
 import { useThemeColor } from "@/hooks/use-theme-color";
-import { getMyGroups } from "@/services/groups.service";
-import { GroupResponse } from "@/types/Group";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { Link, useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -22,23 +21,15 @@ export default function HomeScreen() {
 
   const productivity = completedTasks / totalTasks;
 
-  const [groups, setGroups] = useState<GroupResponse[]>([]);
-
-  useEffect(() => {
-    async function loadGroups() {
-      const data = await getMyGroups();
-      setGroups(data);
-    }
-
-    loadGroups();
-  }, []);
+  const { groups } = useGroups();
+  const homeGroups = groups.slice(0, 5);
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor }]}>
       <Header />
 
       <FlatList
-        data={groups}
+        data={homeGroups}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <CardGroup
@@ -46,7 +37,7 @@ export default function HomeScreen() {
             description={item.description}
             typeGroup={item.typeGroup}
             quantTasks={item.quantTasks}
-            //image={item.image}
+            //image={null}
             groupId={item.id}
           />
         )}

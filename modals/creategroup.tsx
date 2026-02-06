@@ -1,9 +1,8 @@
-import { Button, IconButton } from "@/components/Button";
+import { Button } from "@/components/Button";
 import { LogoHeader } from "@/components/Header";
 import Input from "@/components/Input";
+import { useGroups } from "@/contexts/GroupsContext";
 import { useThemeColor } from "@/hooks/use-theme-color";
-import { createGroup } from "@/services/groups.service";
-import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import {
   Keyboard,
@@ -28,6 +27,8 @@ export default function CreateGroupModal({ visible, onClose }: ModalProps) {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const { addGroup } = useGroups();
 
   const [groupName, setGroupName] = useState("");
   const [description, setDescription] = useState("");
@@ -71,7 +72,7 @@ export default function CreateGroupModal({ visible, onClose }: ModalProps) {
     try {
       setLoading(true);
 
-      await createGroup({
+      await addGroup({
         groupName: groupName.trim(),
         description: description.trim(),
         typeGroup: typeGroup.trim(),

@@ -15,3 +15,7 @@ export async function getGroupById(groupId: string): Promise<GroupResponse> {
     const response = await api.get<GroupResponse>(`/groups/${groupId}`)
     return response.data;
 }
+
+export async function deleteGroup(groupId: string): Promise<void> {
+    await api.delete<void>(`/groups/${groupId}`)
+}
