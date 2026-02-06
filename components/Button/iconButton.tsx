@@ -3,7 +3,7 @@ import { useThemeColor } from "@/hooks/use-theme-color";
 import { Pressable, ViewStyle } from "react-native";
 
 type CloseButtonProps = {
-  onPress: () => void;
+  onPress?: () => void;
   icon: React.ReactNode;
   style?: ViewStyle;
 };

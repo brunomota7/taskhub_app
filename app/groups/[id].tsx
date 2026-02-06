@@ -1,8 +1,7 @@
-import { IconButton } from "@/components/Button";
+import { HeaderMain } from "@/components/Header";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { getGroupById } from "@/services/groups.service";
 import { GroupResponse } from "@/types/Group";
-import { AntDesign, MaterialIcons, Octicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -41,42 +40,23 @@ export default function GroupDetails() {
   }
 
   if (!group) {
-    return <Text style={[ { color: textColor }]}>Grupo não encontrado.</Text>
+    return <Text style={[{ color: textColor }]}>Grupo não encontrado.</Text>;
   }
+
+  const handleSearch = () => {};
+  const openMore = () => {};
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor }]}>
-      <View style={[styles.header, { borderBottomColor: borderBorder }]}>
-        <View style={styles.left}>
-          <IconButton
-            icon={
-              <MaterialIcons
-                name="keyboard-arrow-left"
-                size={28}
-                color={iconColor}
-              />
-            }
-            onPress={() => router.back()}
-            style={styles.iconButton}
-          />
-          <Text style={[styles.title, { color: textColor }]}>
-            Área de Trabalho
-          </Text>
-        </View>
-
-        <View style={styles.right}>
-          <IconButton
-            icon={<Octicons name="search" size={20} color={iconColor} />}
-            onPress={() => console.log("Search")}
-            style={styles.iconButton}
-          />
-          <IconButton
-            icon={<AntDesign name="ellipsis" size={20} color={iconColor} />}
-            onPress={() => console.log("More")}
-            style={styles.iconButton}
-          />
-        </View>
-      </View>
+      <HeaderMain
+        title="Área de Trabalho"
+        showBackButton={true}
+        onBackPress={() => router.back()}
+        showSearch={true}
+        onSearchPress={handleSearch}
+        showMore={true}
+        onMorePress={openMore}
+      />
 
       <View style={styles.content}></View>
     </SafeAreaView>
